@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{Basch:1999:KDS:930212}
+Julien Basch.
+\newblock {\em Kinetic Data Structures}.
+\newblock PhD thesis, Stanford, CA, USA, 1999.
+\newblock AAI9943622.
+
+\bibitem{Guibas:1998:KDS:298960.299007}
+Leonidas~J. Guibas.
+\newblock Kinetic data structures: A state of the art report.
+\newblock In {\em Proceedings of the Third Workshop on the Algorithmic
+  Foundations of Robotics on Robotics : The Algorithmic Perspective: The
+  Algorithmic Perspective}, WAFR '98, pages 191--209, Natick, MA, USA, 1998. A.
+  K. Peters, Ltd.
+
+\bibitem{Mehta:2004:HDS:1044879}
+Dinesh~P. Mehta and Sartaj Sahni.
+\newblock {\em Handbook Of Data Structures And Applications (Chapman \&
+  Hall/Crc Computer and Information Science Series.)}.
+\newblock Chapman \& Hall/CRC, 2004.
+
+\end{thebibliography}

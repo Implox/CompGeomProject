@@ -3,6 +3,7 @@
 \usepackage{natbib}
 
 \begin{document}
+  \nocite{*}
   \pagestyle{plain}
   \begin{center}
     {\LARGE Kinetic Data Structures Project Proposal} \\ 
@@ -11,13 +12,14 @@
   \end{center}
 
   \section*{Overview}
+
   \noindent When modeling the interactions of continuously-moving objects in a physical
   scene it is useful to keep track of certain attributes such as the closest pair of
   objects in the scene, the convex hull of all objects, the minimum spanning tree of
-  the objects, and so on. Data structures for computing and maintaining
-  such attributes are well known, however they are generally designed with the assumption
-  that the configuration of each item in the scene is immutable. Using these structures 
-  for representing scenes which change over time often in inefficient computations. 
+  the objects, and so on. Data structures for computing and maintaining such attributes 
+  are well known, however they are generally designed with the assumption that the 
+  configuration of each item in the scene is immutable. Using these structures 
+  for representing scenes which change over time often results in inefficient computations. 
   To handle scenes which change over time, a specialized category of structures known as
   \textit{kinetc data structures}~(KDEs) have been developed.
   
@@ -26,7 +28,13 @@
   the structures and their inner workings.
 
   \section*{Deliverables}
+  A graphical software which calculates and displays common attributes (e.g.: closest pair, 
+  convex hull, etc.) in a continuously-changing system using kinetic data structures, which
+  also allows a user to see a visualization of the underlying data structure and the intermediate
+  steps involved in computing the attributes.
 
-  \section*{Tentative Bibliography}
+  \renewcommand\refname{Tentative Bibliography}
+  \bibliography{citations}
+  \bibliographystyle{plain}
 
 \end{document}
