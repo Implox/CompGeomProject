@@ -111,3 +111,8 @@ def delaunify(triangulation):
             flip_edge.flip()
         else:
             break
+
+def make_delaunay(S):
+    t = triangulation_incremental(S)
+    delaunify(t)
+    return t

@@ -1,3 +1,4 @@
+from math import sqrt
 import pred
 from point import Point2d
 from boundinnerclass import BoundInnerClass
@@ -44,6 +45,11 @@ class DCEL:
         # Make sure that each face correctly refers to an incident half-edge
         new_face.incident_edge = e2
         e1.face.incident_edge = e1
+
+    def circumcircles(self):
+        for face in self.faces:
+            if face is not self.outer_face:
+                yield face.circumcircle()
 
     @BoundInnerClass
     class HalfEdge:
@@ -155,6 +161,51 @@ class DCEL:
         def __init__(self, dcel):
             self.incident_edge = None
             dcel.faces.append(self)
+
+        def circumcircle(self):
+            a = self.incident_edge.origin.coord
+            b = self.incident_edge.next.origin.coord
+            c = self.incident_edge.prev.origin.coord
+
+            # LOL
+            D = ( a.y * c.x 
+                + b.y * a.x 
+                - b.y * c.x 
+                - a.y * b.x 
+                - c.y * a.x 
+                + c.y * b.x) * 2.0
+
+            # OMG
+            x = ( b.y * a.x * a.x
+                - c.y * a.x * a.x
+                - b.y * b.y * a.y
+                + c.y * c.y * a.y
+                + b.x * b.x * c.y
+                + a.y * a.y * b.y
+                + c.x * c.x * a.y
+                - c.y * c.y * b.y
+                - c.x * c.x * b.y
+                - b.x * b.x * a.y
+                + b.y * b.y * c.y
+                - a.y * a.y * c.y) / D
+
+            # WTF
+            y = ( a.x * a.x * c.x
+                + a.y * a.y * c.x
+                + b.x * b.x * a.x
+                - b.x * b.x * c.x
+                + b.y * b.y * a.x
+                - b.y * b.y * c.x
+                - a.x * a.x * b.x
+                - a.y * a.y * b.x
+                - c.x * c.x * a.x
+                + c.x * c.x * b.x
+                - c.y * c.y * a.x
+                + c.y * c.y * b.x) / D
+
+            circumcenter = Point2d(x, y)
+            radius = 2.0 * sqrt(circumcenter.dist_sq(self.incident_edge.origin.coord))
+            return (circumcenter, radius)
 
 if __name__ == '__main__':
     dcel = DCEL()
