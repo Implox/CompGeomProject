@@ -25,8 +25,11 @@ class DCEL:
 
         # Create a new face for the second half of the split
         new_face = self.Face()
+
+        # Create new half-edges for the splitting edge
         s1 = self.HalfEdge(e2.origin, e1.face)
         s2 = self.HalfEdge(e1.origin, new_face)
+        s1.make_twins(s2)
 
         # Insert new half-edges into the cyclic lists
         e2.prev.make_next(s1)

@@ -3,13 +3,16 @@ from pred import *
 
 def get_ccw_triangle(a, b, c):
     tri = DCEL()
-    v1 = tri.Vertex(a)
-    v2 = tri.Vertex(b)
-    v3 = tri.Vertex(c)
 
-    if not is_lht(a, b, c):
-        # swap v2's and v3's values
-        v2, v3 = v3, v2
+    v1 = v2 = v3 = None
+    if is_lht(a, b, c):
+        v1 = tri.Vertex(a)
+        v2 = tri.Vertex(b)
+        v3 = tri.Vertex(c)
+    else:
+        v1 = tri.Vertex(a)
+        v2 = tri.Vertex(c)
+        v3 = tri.Vertex(b)
 
     # Create inner face
     inner = tri.Face()
@@ -25,14 +28,14 @@ def get_ccw_triangle(a, b, c):
     he31.make_next(he12)
 
     # Create outer half-edges
-    he21 = tri.HalfEdge(v1, tri.outer_face)
-    he32 = tri.HalfEdge(v2, tri.outer_face)
-    he13 = tri.HalfEdge(v3, tri.outer_face)
+    he21 = tri.HalfEdge(v2, tri.outer_face)
+    he13 = tri.HalfEdge(v1, tri.outer_face)
+    he32 = tri.HalfEdge(v3, tri.outer_face)
 
     # Connect next/prev pointers on outer face
     he21.make_next(he13)
-    he32.make_next(he32)
-    he13.make_next(he21)
+    he13.make_next(he32)
+    he32.make_next(he21)
 
     # Set twins
     he12.make_twins(he21)
@@ -42,11 +45,10 @@ def get_ccw_triangle(a, b, c):
     return tri
 
 def triangulation_incremental(S):
-    sort(S)
+    S.sort()
     triangulation = get_ccw_triangle(S[0], S[1], S[2])
 
-    for k in range(3, len(S)):
-        pk = S[k]
+    for pk in S[3:]:
         he = triangulation.outer_face.incident_edge
         upper_tangent = None
         lower_tangent = None
@@ -61,10 +63,12 @@ def triangulation_incremental(S):
 
         if len(tangents) == 2:
             new_vertex = triangulation.Vertex(pk)
-            upper_tangent = tangents[0]
-            lower_tangent = tangents[1]
-            if not is_lht(pk, tangents[0].origin.coord, tangents[0].next.origin.coord):
-                upper_tangent, lower_tangent = lower_tangent, upper_tangent
+            if is_lht(pk, tangents[0].origin.coord, tangents[0].next.origin.coord):
+                upper_tangent = tangents[0]
+                lower_tangent = tangents[1]
+            else:
+                upper_tangent = tangents[1]
+                lower_tangent = tangents[0]
 
             new_face = triangulation.Face()
 

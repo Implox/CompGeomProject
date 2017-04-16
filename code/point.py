@@ -6,10 +6,14 @@ class Point2d(object):
     def __str__(self):
         return '({}, {})'.format(self.x, self.y)
 
-    def __cmp__(self, other):
+    def __lt__(self, other):
         if isinstance(other, Point2d):
-            cmp_x = self.x.cmp(other.x)
-            return cmp_x if cmp_x != 0 else self.y.cmp(other.y)
+            if self.x < other.x:
+                return True
+            elif self.x == other.x:
+                return self.y < other.y
+            else:
+                return False
         else:
             return NotImplemented
 
@@ -29,7 +33,7 @@ class KineticPoint2d(Point2d):
         self.dy = dy
 
     def __str__(self):
-        return('pos({},{}) | vel({},{})'.format(self.x,self.y,self.vx,self.vy))
+        return('pos({},{}) | vel({},{})'.format(self.x,self.y,self.dx,self.dy))
 
     def position_at(self, t):
         x_prime = self.x + t * self.dx
