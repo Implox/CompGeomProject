@@ -167,6 +167,7 @@ class DCEL:
             b = self.incident_edge.next.origin.coord
             c = self.incident_edge.prev.origin.coord
 
+            #jesus
             # LOL
             D = ( a.y * c.x 
                 + b.y * a.x 
