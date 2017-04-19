@@ -36,26 +36,12 @@ def in_circle(a, b, c, d):
     clift = cdx * cdx + cdy * cdy
 
     return (alift * bcdet + blift * cadet + clift * abdet) > 0
-    
+
 #to get the distance from circle we can got over all the points (n^2 alg)
 # and return the actual number of the result for each one.  then keep a 
 # (kinetic) sorted list / dictionary of them .when a kinetic when one of the 
 # sorted items hits 0 a certificate is broken in the list which triggers a broken 
 # certificate in the delauny tirangulation
 
-def in_circle_dist(a, b, c, d):
-    adx = a.x - d.x
-    ady = a.y - d.y
-    bdx = b.x - d.x
-    bdy = b.y - d.y
-    cdx = c.x - d.x
-    cdy = c.y - d.y
-
-    abdet = adx * bdy - bdx * ady
-    bcdet = bdx * cdy - cdx * bdy
-    cadet = cdx * ady - adx * cdy
-    alift = adx * adx + ady * ady
-    blift = bdx * bdx + bdy * bdy
-    clift = cdx * cdx + cdy * cdy
-
-    return (alift * bcdet + blift * cadet + clift * abdet)
+# or maybe get the velocity vector of the point then see which circles it will intersect
+#then only check the circles that the vector intersects.  
