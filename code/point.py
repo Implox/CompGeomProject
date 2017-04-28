@@ -27,10 +27,12 @@ class Point2d(object):
         return Point2d(0.5 * (a.x + b.x), 0.5 * (a.y + b.y))
 
 class KineticPoint2d(Point2d):
+    dt = 0.5
     def __init__(self,x,y,dx,dy):
-        super().__init__(x,y)
+        super(x,y)
         self.dx = dx
         self.dy = dy
+        
 
     def __str__(self):
         return('pos({},{}) | vel({},{})'.format(self.x,self.y,self.dx,self.dy))
@@ -39,3 +41,9 @@ class KineticPoint2d(Point2d):
         x_prime = self.x + t * self.dx
         y_prime = self.y + t * self.dy
         return Point2d(x_prime, y_prime)
+
+    def advance_dt(self):
+        dt = self.dt
+        self.x = self.x + dt * self.dx
+        self.y = self.y + dt * self.dy
+        

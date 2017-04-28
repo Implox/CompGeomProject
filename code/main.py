@@ -15,6 +15,22 @@ def face_coords(dcel, face):
     ie = face.incident_edge
     return [e.origin.coord for e in dcel.get_cycle_from(ie)]
 
+def advance(dcel):
+    vertiecs = dcel.verticies
+    for e in vertiecs:
+        e.coord.advance_dt()
+
+def check_incircle(dcel):
+    #to be called after advance
+    half_edges = dcel.half_edges
+    is_all_legal = True
+    for e in half_edges:
+        if not e.is_legal():
+            is_all_legal = False
+    return is_all_legal
+    
+
+
 if __name__ == '__main__':
     random.seed(0)
 
