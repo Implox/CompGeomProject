@@ -20,6 +20,8 @@ def advance(dcel):
     for e in vertiecs:
         e.coord.advance_dt()
 
+#instead of using this method you could just call delaunify again
+#cause it does the same thing.  IDK which one would be more efficient
 def check_incircle(dcel):
     #to be called after advance
     half_edges = dcel.half_edges
