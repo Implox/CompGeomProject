@@ -11,7 +11,7 @@ i= 0
 
 
 def setup():
-    size(WIDTH,HEIGHT)
+    size(WIDTH+200,HEIGHT+200)
     smooth(4)
     background(255)
 
@@ -24,6 +24,7 @@ def setup():
 
 
 def draw():
+    global triangulation
     background(255)
     for f in triangulation.faces:
         if not f == triangulation.outer_face:
@@ -40,11 +41,14 @@ def draw():
     stroke(0)
     for e in triangulation.half_edges:
         if e.is_legal():
+            
             stroke(0,0,255)
         else:
-            stroke(0,255,0)
+            strokeWeight(3)
+            stroke(255,0,0)
         line(to_x(e.origin.coord.x),to_y(e.origin.coord.y),to_x(e.twin.origin.coord.x),to_y(e.twin.origin.coord.y))
         stroke(0)
+        strokeWeight(1)
 
     #skipping the drawing the selected edge
 
@@ -55,7 +59,7 @@ def draw():
         ellipse(to_x(v.coord.x),to_y(v.coord.y),8,8)
 
     #next timestep
-    if (keyPressed) and (key =='a'):
+    if (keyPressed) and (key =='a') and check_incircle(triangulation):
         advance(triangulation)
         
     if (keyPressed) and (key == 'd'):
@@ -64,7 +68,8 @@ def draw():
     
 
     if not check_incircle(triangulation):
-        i+1
+        global i
+        i = i+1
         print("not incircle , {}").format(i)
         
     
