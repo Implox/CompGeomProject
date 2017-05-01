@@ -2,8 +2,8 @@ from point import *
 from dcel import *
 from algorithm import *
 import random
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 1000
+HEIGHT = 800
 NUM_POINTS = 20
 
 
@@ -49,12 +49,11 @@ def check_incircle(dcel):
             is_all_legal = False
     return is_all_legal
 
-def find_violation(dcel):
+def find_violations(dcel):
     half_edges = dcel.half_edges
     for e in half_edges:
         if not e.is_legal():
-           return e.face.circumcircle()
-    return None
+           yield e.face.circumcircle()
             
 
 if __name__ == '__main__':

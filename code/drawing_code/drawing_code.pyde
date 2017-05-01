@@ -19,6 +19,7 @@ def setup():
     #idk how excatly you wanna do this
     S = make_random_point_set(num_points,WIDTH,HEIGHT)
     triangulation = triangulation_incremental(S)
+    delaunify(triangulation)
 
 def keyPressed():
     global triangulation
@@ -34,6 +35,7 @@ def keyPressed():
         if key == 'r':
             S = make_random_point_set(num_points,WIDTH,HEIGHT)
             triangulation = triangulation_incremental(S)
+            delaunify(triangulation)
 
 def draw():
     global triangulation
@@ -56,11 +58,13 @@ def draw():
             endShape(CLOSE)
 
     #draw edges
+    illegal_edges = []
     stroke(0)
     for e in triangulation.half_edges:
         if e.is_legal():
             stroke(0,0,255)
         else:
+            illegal_edges.append(e)
             strokeWeight(3)
             stroke(255,0,0)
 
@@ -77,18 +81,17 @@ def draw():
     for v in triangulation.vertices:
         ellipse(to_x(v.coord.x),to_y(v.coord.y),8,8)
         
-    if ADVANCE and check_incircle(triangulation):
+    if ADVANCE and illegal_edges == []:#check_incircle(triangulation):
         advance(triangulation, dt)
     else:
         ADVANCE = False
-        x = find_violation(triangulation)
-        if x is not None:
-            (p, r) = x
+        for (p, r) in map(lambda e: e.face.circumcircle(), illegal_edges):
             noFill()
             strokeWeight(2)
             stroke(255, 0, 0)
             ellipse(to_x(p.x), to_y(p.y), r, r) 
-            strokeWeight(1)       
+            strokeWeight(1)
+                   
     
     end_time = time.time()
     diff = end_time - start_time
