@@ -1,0 +1,64 @@
+@inproceedings{Gui98,
+ author = {Guibas, Leonidas J.},
+ title = {Kinetic Data Structures: A State of the Art Report},
+ booktitle = {Proceedings of the Third Workshop on the Algorithmic Foundations of Robotics on Robotics : The Algorithmic Perspective: The Algorithmic Perspective},
+ series = {WAFR '98},
+ year = {1998},
+ isbn = {1-56881-081-4},
+ location = {Houston, Texas, USA},
+ pages = {191--209},
+ numpages = {19},
+ url = {http://dl.acm.org/citation.cfm?id=298960.299007},
+ acmid = {299007},
+ publisher = {A. K. Peters, Ltd.},
+ address = {Natick, MA, USA},
+ annote = {
+    This article introduces \textit{kinetic data structures} (KDSs) as a theoretical framework for designing and implementing algorithms to efficiently track 
+    attributes of a geometric system that varies continuously over time
+    It explains the why such simulations of geometric systems are useful, and then points out that representing those systems with continuous functions (rather
+    than updating each component of the system discretely) means that the continuity of movement for the components of the system can be exploited for more efficient algorithms.
+    The article then describes the different aspects of the KDS framework: \textit{certificates}, \textit{events}, and \textit{motion models}.
+    \textit{Certificates} are conditions which must be maintained for a described attribute of a system to remain true, and the total set of certificates for a system are what form the
+    proof of correctness for the attribute overall.
+    \textit{Events} are moments in time at which one or more certificates become invalid, meaning that the proof of correctness must be ``repaired" (by modifying certificates).
+    Since these events happen due to individual certificates becoming invalid, repairing the proof can be done efficiently by only computing what is necessary to update the invalid
+    certificates.
+    The basic \textit{motion model} for a KDS, according to the article, is one which maintains a ``flight plan" of each component of the geometric system (typically
+    a polynomial function) and provides a mechanism for updating flight plans at any point in the simulation of the system. 
+    Finally, the article introduces metrics for calculating the efficiency of a KDS, and discusses the applications of KDSs for several computational geometry problems.
+ },
+}
+
+@phdthesis{Bas99,
+ author = {Basch, Julien},
+ advisor = {Guibas, Leonidas J.},
+ title = {Kinetic Data Structures},
+ year = {1999},
+ isbn = {0-599-45290-0},
+ note = {AAI9943622},
+ publisher = {Stanford University},
+ address = {Stanford, CA, USA},
+ annote = {This article describes in much deeper mathematical detail the main points of [2].},
+}
+
+@book{Meh04,
+ author = {Mehta, Dinesh P. and Sahni, Sartaj},
+ title = {Handbook Of Data Structures And Applications (Chapman \& Hall/Crc Computer and Information Science Series.)},
+ year = {2004},
+ isbn = {1584884355},
+ publisher = {Chapman \& Hall/CRC},
+ annote = {Chapter 23 of this work is written by Guibas and simply re-states much of what is described in [2] and [1].},
+}
+
+@article{Gui07,
+Abstract = {In this paper we present a package for implementing exact kinetic data structures built on objects which move along polynomial trajectories. We discuss how the package design was influenced by various considerations, including extensibility, support for multiple kinetic data structures, access to existing data structures and algorithms in CGAL, as well as debugging. Due to the similarity between the operations involved, the software can also be used to compute arrangements of polynomial objects using a sweepline approach. The package consists of three main parts, the kinetic data structure framework support code, an algebraic kernel which implements the set of algebraic operations required for kinetic data structure processing, and kinetic data structures for Delaunay triangulations in one and two dimensions, and Delaunay and regular triangulations in three dimensions. The models provided for the algebraic kernel support both exact operations and inexact approximations with heuristics},
+Author = {Russel, Daniel and Karavelas, Menelaos I. and Guibas, Leonidas J.},
+ISSN = {0925-7721},
+Journal = {Computational Geometry: Theory and Applications},
+Pages = {111 - 127},
+Title = {A package for exact kinetic data structures and sweepline algorithms.},
+Volume = {38},
+URL = {http://search.ebscohost.com/login.aspx?direct=true&AuthType=ip,cookie,url,cpid,uid&custid=s8863137&db=edselp&AN=S092577210700020X&site=eds-live&scope=site&authtype=ip,uid},
+Year = {2007},
+annote = {This paper was published alongside a C++ library which provides useful features for implementing arbitrary kinetic data structures, and explains the details behind the implementation of that library. We hoped to use this paper to help us implement our own KDSs but were unable to do so by the end of the project.},
+}
