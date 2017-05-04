@@ -27,7 +27,6 @@ class Point2d(object):
         return Point2d(0.5 * (a.x + b.x), 0.5 * (a.y + b.y))
 
 class KineticPoint2d(Point2d):
-    dt = 0.5
     def __init__(self,x,y,dx,dy):
         self.x = x
         self.y = y
@@ -43,8 +42,7 @@ class KineticPoint2d(Point2d):
         y_prime = self.y + t * self.dy
         return Point2d(x_prime, y_prime)
 
-    def advance_dt(self):
-        dt = self.dt
-        self.x = self.x + dt * self.dx
-        self.y = self.y + dt * self.dy
-        
+    def advance_dt(self, dt):
+        k = 1.0
+        self.x = self.x + k * dt * self.dx
+        self.y = self.y + k * dt * self.dy
